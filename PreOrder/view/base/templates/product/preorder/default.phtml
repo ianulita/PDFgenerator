@@ -1,0 +1,22 @@
+<?php
+$product = $block->getProduct();
+$preOrderFlag = false;
+$preOrderNote = '';
+
+if ($product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+    $preOrderFlag = false;
+} else {
+    // simple
+    if ($product->getPreOrderNote()) {
+        $preOrderFlag = true;
+        $preOrderNote = $product->getPreOrderNote();
+    }
+}
+?>
+
+<div class="pre-order-container">
+    <img src="<?php echo $this->getViewFileUrl('images/loader-1.gif'); ?>" width="20px" alt="Loading Pre Order" id="pre-order-loader" style="display: none;" />
+    <span class="pre-order" id="pre-order">
+        <?php echo __($preOrderNote); ?>
+    </span>
+</div>

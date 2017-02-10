@@ -1,6 +1,6 @@
 <?php
 
-namespace Acidgreen\PdfGenerator\Controller\Index;
+namespace Acidgreen\PdfGenerator\Controller\Invoice;
 use WeProvide\Dompdf\Controller\Result\Dompdf;
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -30,19 +30,27 @@ class Index extends \Magento\Framework\App\Action\Action
     public function getData() {
         return $this->request->getParams();
     }
-   
+    public function createInvoicePdf($orderid) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://127.0.0.1:8888/magetuts/magetuts/pdfgenerator/index/index/invoice_id/' . $orderid . '/');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $my_html = curl_exec($ch);
+        $loc = strpos($my_html, "<input name=\"form_key\"");
+        $render = substr($my_html, $loc);
+        curl_close($ch);
+        
+        return $render;
+    }
     public function execute()
     {
         $data = $this->getData();
-        if($data['invoice_id']) {
-            $criteria = $this->searchCriteriaBuilder->addFilter('entity_id', $data['invoice_id'])->create();
-            $this->_coreRegistry->register('orderId', $data['invoice_id']);
-            $this->_coreRegistry->register('shipments', 'test');
-        }
+        $orderId = $data['invoice_id'];
         /*****
-        * Display on page
-        // *****/
-        $page_object = $this->resultPageFactory->create();
-        return $page_object;
+        * Create PDF
+        *****/
+        $response = $this->dompdfFactory->create();
+        $response->setData($this->createInvoicePdf($orderId));
+        return $response;
+
     }
 }

@@ -8,7 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="content">
-            <block class="Acidgreen\PdfGenerator\Block\Main" name="shipment_pdf" template="Acidgreen_PdfGenerator::main.phtml"/>
+            <block class="Acidgreen\PdfGenerator\Block\Main" name="invoice_pdf" template="Acidgreen_PdfGenerator::invoice.phtml"/>
         </referenceBlock>
     </body>
 </page>

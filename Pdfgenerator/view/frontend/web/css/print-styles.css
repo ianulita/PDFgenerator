@@ -1,0 +1,167 @@
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/opensans/light/opensans-300.eot');
+	src: url('../fonts/opensans/light/opensans-300.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans/light/opensans-300.woff2') format('woff2'), url('../fonts/opensans/light/opensans-300.woff') format('woff'), url('../fonts/opensans/light/opensans-300.ttf') format('truetype'), url('../fonts/opensans/light/opensans-300.svg#Open Sans') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/opensans/regular/opensans-400.eot');
+	src: url('../fonts/opensans/regular/opensans-400.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans/regular/opensans-400.woff2') format('woff2'), url('../fonts/opensans/regular/opensans-400.woff') format('woff'), url('../fonts/opensans/regular/opensans-400.ttf') format('truetype'), url('../fonts/opensans/regular/opensans-400.svg#Open Sans') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/opensans/semibold/opensans-600.eot');
+	src: url('../fonts/opensans/semibold/opensans-600.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans/semibold/opensans-600.woff2') format('woff2'), url('../fonts/opensans/semibold/opensans-600.woff') format('woff'), url('../fonts/opensans/semibold/opensans-600.ttf') format('truetype'), url('../fonts/opensans/semibold/opensans-600.svg#Open Sans') format('svg');
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/opensans/bold/opensans-700.eot');
+	src: url('../fonts/opensans/bold/opensans-700.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans/bold/opensans-700.woff2') format('woff2'), url('../fonts/opensans/bold/opensans-700.woff') format('woff'), url('../fonts/opensans/bold/opensans-700.ttf') format('truetype'), url('../fonts/opensans/bold/opensans-700.svg#Open Sans') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/light/Gotham-Light.otf');
+	font-weight: 300;
+	font-style: normal;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/light/Gotham-LightIta.otf');
+	font-weight: 300;
+	font-style: italic;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/regular/Gotham-Book.otf');
+	font-weight: 400;
+	font-style: normal;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/regular/Gotham-BookIta.otf');
+	font-weight: 400;
+	font-style: italic;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/medium/Gotham-Medium.otf');
+	font-weight: 500;
+	font-style: normal;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/medium/Gotham-MediumIta.otf');
+	font-weight: 500;
+	font-style: italic;
+ }
+@font-face {
+	font-family: 'gotham';
+	src: url('../../fonts/gotham/bold/Gotham-Bold.otf');
+	font-weight: 700;
+	font-style: normal;
+  }
+ @font-face {
+    font-family: 'gotham';
+    src: url('../../fonts/gotham/bold/Gotham-BoldIta.otf');
+    font-weight: 700;
+    font-style: italic;
+}
+p, h1, h2, h3, h4, h5, td {
+	color: #000;
+	font-family: 'HelveticaNeue-Light', Helvetica, Arial, sans-serif;
+}
+table {
+	width: 100%;
+}
+h1 {
+	font-weight: 700;
+	line-height: 1.1;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-family: 'HelveticaNeue-Light', Helvetica, Arial, sans-serif;
+}
+h2 {
+	font-weight: 700;
+	margin-top; 0px;
+	font-size: 18px;
+	font-family: 'HelveticaNeue-Light', Helvetica, Arial, sans-serif;
+}
+
+p {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.tall {
+	margin-bottom: 10px;
+}
+th {
+	font-size: 19px;
+	border-bottom: 1px solid #cccccc;
+	font-family: 'HelveticaNeue-Light', Helvetica, Arial, sans-serif;
+}
+hr {
+	margin-bottom: 00px;
+	margin-top: 20px;
+	height: 2px;
+	background-color: #cccccc;
+	border: none;
+}
+.items td {
+	vertical-align: middle;
+}
+.items tr:nth-child(odd) {
+	background-color: #ececec;
+}
+.items tr:first-child {
+	background-color: #fff;
+}
+.totals tr {
+	border-bottom: 2px solid #cccccc;
+}
+small {
+	display: none;
+}
+
+.methods {
+	width: 75%;
+}
+tr.grandtotal {
+	border-bottom: 1px solid transparent;
+}
+tr.grandtotal td {
+	font-weight: 500;
+	font-size: 24px;
+	font-family: 'gotham','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+
+
+.left {
+	text-align: left;
+	font-size: 16px;
+}
+.right {
+	text-align: right;
+	font-size: 16px;
+}
+.center {
+	text-align: center;
+}
+.top {
+	vertical-align: top;
+}
+.middle {
+	vertical-align: middle;
+}
+.bottom {
+	vertical-align: bottom;
+}

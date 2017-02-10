@@ -1,18 +1,142 @@
+<html>
 <?php
 /**
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-?>
-<style>
-p {
-	color: #bada55;
-	font-family: Helvetica, Helvetica, Arial, sans-serif;
-}
-</style>
-<p><?= 'Hello world!' ?></p>
+?><head>
+<link href="<?php echo $block->getAssets()->getUrl();?>" rel="stylesheet" type="text/css" />
+</head>
+<body>
 <?php
-echo "<pre>";
-print_r($block->getShipment());
-echo "</pre>";
+$order = $block->getOrderDetails();
+$shipments = $order->getShipmentsCollection();
+if($order->getCustomerId() === NULL) {
+	
+} else {
+	$customerId = $order->getCustomerId();
+	$customer = $block->getOrderCustomerDetails($customerId);
+	
+}
+$customerDetails =  array(
+	'BFirstname'	=>	$order->getBillingAddress()->getFirstname(),
+	'BLastname'		=>	$order->getBillingAddress()->getLastname(),
+	'SFirstname'	=>	$order->getShippingAddress()->getFirstname(),
+	'SLastname'		=>	$order->getShippingAddress()->getLastname()
+);
+$billing = $order->getBillingAddress()->getData();
+$shipping = $order->getShippingAddress()->getData();
 ?>
+
+<div style="width:100%;text-align: center;">
+	<img src="https://www.classicspirit.com.au/media/logo/default/logo.jpg"/>
+	<p style="text-transform:uppercase;">785 MILITARY RD MOSMAN NSW AUSTRALIA 2088</p>
+	<p style="text-transform:uppercase;">(02) 9969 9688 WWW.CLASSICSPIRIT.COM.AU</p>
+</div>
+<hr />
+<?php echo $this->getSkinUrl(); ?>
+<table>
+	<tbody>
+	<tr>
+		<td class="top">
+			<h1>Order #<?php echo $order->getIncrementId();?></h1>
+			<p class="tall" style="text-transform:uppercase;">Dear <?php echo $customerDetails['SFirstname']; ?>,</p>
+			<p class="tall">Thank you for your order with Classic Spirit.</p>
+			<p class="tall">Your order details are below for your reference</p>
+			<p class="tall">Any queries please contact us via SHOP@CLASSICSPIRIT.COM.AU or call the store on 02 9969 9688.</p>
+		</td>
+		<td style="background-color: #ececec; padding: 10px 15px 50px;">
+			<h2>Delivery Details</h2>
+			<p>Order Date: <?php echo date("d/m/Y", strtotime($order->getCreatedAt()));?> </p>
+			<p><?php echo $customerDetails['BFirstname'];?> <?php echo $customerDetails['BLastname'];?></p>
+			<p><?php echo $shipping['street'];?></p>
+			<p><?php echo $shipping['city'];?> <?php echo $shipping['country_id'];?> <?php echo $shipping['postcode'];?></p>
+			<p>Phone: <?php echo $shipping['telephone'];?></p>
+			<p>Email: <?php echo $shipping['email'];?></p>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<hr />
+
+<!-- ITEMS TABLE -->
+<table class="items">
+	<thead>
+		<tr>
+			<th>SKU</th>
+			<th>Product</th>
+			<th>Price</th>
+			<th>Status</th>
+			<th>Qty</th>
+			<th>Subtotal</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+		foreach($shipments as $shipment) {
+			$itemsCollection = $shipment->getItemsCollection();
+			foreach($itemsCollection as $item){
+				$product = $block->getProductDetails($item->getSku());
+				$origPrice = "";
+				$strTxt = "";
+				if($product->getPrice() !== $item->getPrice()) {
+					$origPrice = "<s>$" . $product->getPrice() . "</s><br><strong>";
+					$strTxt = "</strong>";
+				}
+				echo "<tr>";
+				echo "<td>" . $item->getSku() . "</td>";
+				echo "<td>" . $item->getName() . "</td>";
+				echo "<td>" . $origPrice . "$" . number_format($item->getPrice(), 2) . $strTxt . "</td>";
+				if ($product->getPreOrderNote()){
+					echo "<td>" . $product->getPreOrderNote() . "</td>";
+				}
+				else if($origPrice != "") {
+					echo "<td>" . "Sale" . "</td>";
+				} else {
+					echo "<td></td>";
+				}
+				echo "<td>" . number_format($item->getQty(),0) . "</td>";
+				echo "<td>$" . number_format(($item->getPrice() * $item->getQty()),2) . "</td>";
+				echo "</tr>";
+			}
+		}
+		?>
+	</tbody>
+</table>
+<hr />
+<table class="totals">
+	<tr>
+		<td class="methods">
+			<h2>Payment Method</h2>
+			<p><?php echo $order->getPayment()->getMethodInstance()->getTitle();?></p>
+			<h2>Shipping Method</h2>
+			<p><?php echo $order->getShippingDescription();?></p>
+			<p>(total shipping charges $<?php echo number_format($order->getShippingAmount(),2);?>)</p>
+			<p>Tracking details to be emailed once sent.</p>
+		</td>
+		<td class="total">
+			<table>
+				<tr>
+					<td class="right">Subtotal</td>
+					<td class="left">$<?php echo number_format($order->getSubTotal(),2);?></td>
+				</tr>
+				<?php if ($order->getBaseDiscountAmount() && $order->getBaseDiscountAmount() > 0) echo "<tr><td>Discount</td><td>$" . $order->getBaseDiscountAmount() . "</td>"; ?>
+				<tr>
+					<td class="right">Delivery</td>
+					<td class="left">$<?php echo number_format($order->getShippingAmount(),2);?></td>
+				</tr>
+				<tr>
+					<td class="right">GST</td>
+					<td class="left">$<?php echo number_format($order->getFullTaxInfo(),2);?></td>
+				</tr>
+				<tr class="grandtotal">
+					<td class="right">Total</td>
+					<td class="left">$<?php echo number_format($order->getGrandTotal(),2);?></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

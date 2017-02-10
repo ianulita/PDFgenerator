@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="acidgreen_preorder_toorderitem_plugin"
+            type="Acidgreen\PreOrder\Model\Quote\Item\ToOrderItem"
+            disabled="false" sortOrder="100"/>
+    </type>
+
+    <preference for="Magento\ConfigurableProduct\Model\ConfigurableAttributeData"
+        type="Acidgreen\PreOrder\Model\ConfigurableAttributeData" />
+
+    <type name="Magento\Swatches\Controller\Ajax\Media">
+        <plugin name="afterMedia" type="Acidgreen\PreOrder\Plugin\Controller\Ajax\Media" sortOrder="1"/>
+    </type>
+
+    <preference for="Magento\Framework\Controller\Result\Json"
+        type="Acidgreen\PreOrder\Model\Json" />
+
+</config>
